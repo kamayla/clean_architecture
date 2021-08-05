@@ -6,6 +6,52 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "User/Auth"
+                ],
+                "description": "ユーザー新規登録",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "氏名",
+                                        "type": "string",
+                                        "default": "Ippei Kamimura"
+                                    },
+                                    "email": {
+                                        "description": "メールアドレス",
+                                        "type": "string",
+                                        "default": "ippei_kamimura@icloud.com"
+                                    },
+                                    "password": {
+                                        "description": "パスワード",
+                                        "type": "string",
+                                        "default": "aaaaaa"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "パスワード(確認)",
+                                        "type": "string",
+                                        "default": "aaaaaa"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "認証トークンを返す"
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [

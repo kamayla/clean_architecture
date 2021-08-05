@@ -24,9 +24,14 @@ Route::group([
 ], function ($router) {
     Route::post('login', 'AuthController@login')
         ->withoutMiddleware(['auth:api']);
-    Route::post('logout', 'AuthController@logout')
+
+    Route::post('register', 'AuthController@register')
         ->withoutMiddleware(['auth:api']);
+
+    Route::post('logout', 'AuthController@logout');
+
     Route::post('refresh', 'AuthController@refresh');
+
     Route::get('me', 'AuthController@me');
 });
 

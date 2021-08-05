@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
+use Packages\UseCase\User\Create\UserCreateRequest;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -15,6 +18,70 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/auth/register",
+     *     tags={"User/Auth"},
+     *     description="ユーザー新規登録",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="氏名",
+     *                     type="string",
+     *                     default="Ippei Kamimura"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     description="メールアドレス",
+     *                     type="string",
+     *                     default="ippei_kamimura@icloud.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     description="パスワード",
+     *                     type="string",
+     *                     default="aaaaaa"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password_confirmation",
+     *                     description="パスワード(確認)",
+     *                     type="string",
+     *                     default="aaaaaa"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="認証トークンを返す",
+     *     )
+     * )
+     */
+    public function register(
+        Request $request,
+        UserCreateUseCaseInterface $userCreateUseCase
+    ) {
+        $userCreateRequest = new UserCreateRequest(
+            (string) Str::orderedUuid(), // orderedUuidはタイムスタンプが加味されているため、重複リスクが限りなく0
+            $request->name,
+            $request->email,
+            $request->password
+        );
+
+        $userCreateUseCase($userCreateRequest);
+
+        if (!$token = auth('api')->attempt($request->all())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /**
