@@ -9,6 +9,8 @@ use Packages\Infrastructure\EloquentRepository\DataStoreTransactionEloquentRepos
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\Application\User\UserCreateInteractor;
 use Illuminate\Support\ServiceProvider;
+use Packages\Domain\Models\Shop\ShopRepository;
+use Packages\Infrastructure\EloquentRepository\ShopEloquentRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UserRepository::class,
             UserEloquentRepository::class
+        );
+
+        $this->app->bind(
+            ShopRepository::class,
+            ShopEloquentRepository::class
         );
 
         $this->app->bind(

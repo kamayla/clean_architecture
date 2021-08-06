@@ -1,0 +1,12 @@
+<?php
+
+
+namespace Packages\Domain\ModelsDummyNameSpaceLast;
+
+class DummyFactoryClass
+{
+    public static function createFromORM()
+    {
+        // ここに作成
+    }
+}
