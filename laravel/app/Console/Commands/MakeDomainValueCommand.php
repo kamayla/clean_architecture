@@ -11,6 +11,8 @@ class MakeDomainValueCommand extends Command
     /**
      * The name and signature of the console command.
      *
+     * e.g. php artisan make:domain-value Shop/ShopLastName -t string
+     *
      * @var string
      */
     protected $name = 'make:domain-value';

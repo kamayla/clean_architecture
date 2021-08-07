@@ -1,0 +1,11 @@
+<?php
+
+
+namespace Packages\UseCase\DummyNameSpaceLast;
+
+
+class DummyRequestClassRequest
+{
+    public function __construct()
+    {}
+}

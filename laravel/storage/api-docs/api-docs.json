@@ -107,6 +107,57 @@
                 ]
             }
         },
+        "/api/product": {
+            "post": {
+                "tags": [
+                    "User/Product"
+                ],
+                "description": "Productを作成",
+                "operationId": "1d0b0d8724685b7b8f9d87f403bfc4df",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Product名",
+                                        "type": "string",
+                                        "default": "花びら大回転"
+                                    },
+                                    "price": {
+                                        "description": "価格",
+                                        "type": "integer",
+                                        "default": "0"
+                                    },
+                                    "stock": {
+                                        "description": "在庫",
+                                        "type": "integer",
+                                        "default": "0"
+                                    },
+                                    "shop_id": {
+                                        "description": "shopのID",
+                                        "type": "string",
+                                        "default": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "作成したShopのオブジェクト"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/shop": {
             "post": {
                 "tags": [

@@ -18,6 +18,9 @@ use Packages\Domain\Models\Product\ProductRepository;
 use Packages\Domain\CommonRepository\UuidGeneratorInterface;
 use Packages\Infrastructure\LaravelFeatureRepository\UuidGenerateLaravelFeatureRepository;
 
+use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
+use Packages\Application\Product\ProductCreateInteractor;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -70,6 +73,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ShopCreateUseCaseInterface::class,
             ShopCreateInteractor::class
+        );
+
+        $this->app->bind(
+            ProductCreateUseCaseInterface::class,
+            ProductCreateInteractor::class
         );
     }
 

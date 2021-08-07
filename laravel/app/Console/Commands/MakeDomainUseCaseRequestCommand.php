@@ -6,28 +6,30 @@ use Illuminate\Console\GeneratorCommand as Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeDomainEntityCommand extends Command
+class MakeDomainUseCaseRequestCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
+     * e.g. php artisan make:domain-usecase-request Product/Create
+     *
      * @var string
      */
-    protected $name = 'make:domain-entity';
+    protected $name = 'make:domain-usecase-request';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '# Create a new entity class';
+    protected $description = '# Create a new domain usecase request';
 
     /**
      * Createのときに表示される
      *
      * @var string
      */
-    protected $type = 'Entity';
+    protected $type = 'UseCaseRequest';
 
     /**
      * Get the stub file for the generator.
@@ -36,7 +38,7 @@ class MakeDomainEntityCommand extends Command
      */
     protected function getStub(): string
     {
-        if (file_exists($customPath = $this->laravel->basePath('stubs/domain-entity.stub'))) {
+        if (file_exists($customPath = $this->laravel->basePath('stubs/domain-usecase-request.stub'))) {
             return $customPath;
         }
     }
@@ -60,7 +62,10 @@ class MakeDomainEntityCommand extends Command
      */
     protected function getPath($name): string
     {
-        return $this->laravel->basePath("packages/Domain/Models") . '/' . str_replace('\\', '/', $name).'.php';
+
+        $nameArray = explode("/", $name);
+        $classHeadName = implode('', $nameArray);
+        return $this->laravel->basePath("packages/UseCase") . '/' . str_replace('\\', '/', $name)."/{$classHeadName}Request.php";
     }
 
     /**
@@ -72,17 +77,9 @@ class MakeDomainEntityCommand extends Command
     protected function buildClass($name)
     {
         $nameArray = explode("/", $name);
-        $lastNameSpace = "";
-        foreach ($nameArray as $value) {
-            if($value === end($nameArray)){
-                break;
-            }
-            $lastNameSpace .= '\\' . $value;
-        }
-
         $replace = [
-            'DummyEntityClass' => end($nameArray),
-            'DummyNameSpaceLast' => $lastNameSpace
+            'DummyRequestClass' => implode($nameArray),
+            'DummyNameSpaceLast' => str_replace('/', '\\', $name),
         ];
 
         return str_replace(

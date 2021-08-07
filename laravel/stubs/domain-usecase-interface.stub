@@ -1,0 +1,9 @@
+<?php
+
+
+namespace Packages\UseCase\DummyNameSpaceLast;
+
+interface DummyInterfaceClassUseCaseInterface
+{
+    public function __invoke(DummyInterfaceClassRequest $request): DummyInterfaceClassResponse;
+}

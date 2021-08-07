@@ -11,6 +11,8 @@ class MakeDomainFactoryCommand extends Command
     /**
      * The name and signature of the console command.
      *
+     * e.g. php artisan make:domain-factory Product/ProductFactory
+     *
      * @var string
      */
     protected $name = 'make:domain-factory';

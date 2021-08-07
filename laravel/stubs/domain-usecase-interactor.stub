@@ -1,0 +1,18 @@
+<?php
+
+
+namespace Packages\Application\DummyInteractorNameSpaceLast;
+
+use Packages\UseCase\DummyUseCaseNameSpaceLast\DummyInteractorClassUseCaseInterface;
+use Packages\UseCase\DummyUseCaseNameSpaceLast\DummyInteractorClassRequest;
+use Packages\UseCase\DummyUseCaseNameSpaceLast\DummyInteractorClassResponse;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
+
+class DummyInteractorClassInteractor implements DummyInteractorClassUseCaseInterface
+{
+    public function __construct()
+    {}
+
+    public function __invoke(DummyInteractorClassRequest $request): DummyInteractorClassResponse
+    {}
+}

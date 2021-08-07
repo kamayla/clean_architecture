@@ -11,6 +11,8 @@ class MakeDomainEloquentRepositoryCommand extends Command
     /**
      * The name and signature of the console command.
      *
+     * e.g. php artisan make:eloquent-repository Product
+     *
      * @var string
      */
     protected $name = 'make:eloquent-repository';

@@ -44,3 +44,12 @@ Route::group([
     Route::post('shop', 'ShopController@store');
 });
 
+/**
+ * Productルーティング
+ */
+Route::group([
+    'middleware' => ['auth:api'],
+], function () {
+    Route::post('product', 'ProductController@store');
+});
+

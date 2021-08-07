@@ -11,6 +11,8 @@ class MakeDomainInterfaceRepositoryCommand extends Command
     /**
      * The name and signature of the console command.
      *
+     * e.g. php artisan make:interface-repository Product
+     *
      * @var string
      */
     protected $name = 'make:interface-repository';
