@@ -1,0 +1,9 @@
+<?php
+
+namespace Packages\Domain\Models\DummyModel;
+
+
+interface DummyModelRepository
+{
+    // ここにインターフェースを作成してね。
+}

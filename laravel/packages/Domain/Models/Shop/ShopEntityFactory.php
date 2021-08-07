@@ -4,6 +4,7 @@
 namespace Packages\Domain\Models\Shop;
 
 use App\Shop;
+use Packages\Domain\Models\User\UserId;
 
 class ShopEntityFactory
 {
@@ -12,7 +13,7 @@ class ShopEntityFactory
         return new ShopEntity(
             ShopId::create($shop->id),
             ShopName::create($shop->name),
-            ShopUserId::create($shop->user_id)
+            UserId::create($shop->user_id)
         );
     }
 }

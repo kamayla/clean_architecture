@@ -38,4 +38,18 @@ class ShopCreateResponse
     {
         return $this->name;
     }
+
+    /**
+     * 今回JsonAPIだけしか想定してないため、余分なプレゼンターなどを作らず
+     * Responseクラスから直接toArrayで公開する。
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
 }

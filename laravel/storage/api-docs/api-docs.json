@@ -106,6 +106,42 @@
                     }
                 ]
             }
+        },
+        "/api/shop": {
+            "post": {
+                "tags": [
+                    "User/Shop"
+                ],
+                "description": "Shopを作成",
+                "operationId": "c6201d49b307315866578fdcf3e08b8c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Shop名",
+                                        "type": "string",
+                                        "default": "メガチュッパ"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "作成したShopのオブジェクト"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {

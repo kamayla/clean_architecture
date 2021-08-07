@@ -2,6 +2,7 @@
 
 namespace Packages\Domain\Models\Shop;
 
+use Packages\Domain\Models\User\UserId;
 
 class ShopEntity
 {
@@ -11,16 +12,16 @@ class ShopEntity
     /** @var ShopName */
     private $name;
 
-    /** @var ShopUserId */
+    /** @var UserId */
     private $userId;
 
     /**
      * ShopEntity constructor.
      * @param ShopId $id
      * @param ShopName $name
-     * @param ShopUserId $userId
+     * @param UserId $userId
      */
-    public function __construct(ShopId $id, ShopName $name, ShopUserId $userId)
+    public function __construct(ShopId $id, ShopName $name, UserId $userId)
     {
         $this->id = $id;
         $this->name = $name;
@@ -44,9 +45,9 @@ class ShopEntity
     }
 
     /**
-     * @return ShopUserId
+     * @return UserId
      */
-    public function getUserId(): ShopUserId
+    public function getUserId(): UserId
     {
         return $this->userId;
     }

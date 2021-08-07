@@ -35,3 +35,12 @@ Route::group([
     Route::get('me', 'AuthController@me');
 });
 
+/**
+ * Shopルーティング
+ */
+Route::group([
+   'middleware' => ['auth:api'],
+], function () {
+    Route::post('shop', 'ShopController@store');
+});
+

@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Shop extends Model
+class Product extends Model
 {
     // プライマリーキーのカラム名
     protected $primaryKey = 'id';
@@ -20,16 +19,13 @@ class Shop extends Model
     protected $fillable = [
         'id',
         'name',
-        'user_id',
+        'price',
+        'stock',
+        'shop_id'
     ];
 
-    public function products(): HasMany
+    public function shop(): BelongsTo
     {
-        return $this->hasMany(Product::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Shop::class);
     }
 }

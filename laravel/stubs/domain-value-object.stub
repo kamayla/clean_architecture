@@ -5,20 +5,26 @@ namespace Packages\Domain\ModelsDummyNameSpaceLast;
 
 class DummyValueClass
 {
+    /** @var DummyType */
     private $_value;
 
-    private function __construct($value)
+    private function __construct(DummyType $value)
     {
         $this->_value = $value;
     }
 
-    public static function create($value): DummyValueClass
+    public static function create(DummyType $value): DummyValueClass
     {
         return new DummyValueClass($value);
     }
 
-    public function value()
+    public function value(): DummyType
     {
         return $this->_value;
+    }
+
+    private function isValid(): bool
+    {
+        // ここに値のルールを記述
     }
 }

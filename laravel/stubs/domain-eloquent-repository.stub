@@ -1,0 +1,12 @@
+<?php
+
+
+namespace Packages\Infrastructure\EloquentRepository;
+
+use App\DummyModel;
+use Packages\Domain\Models\DummyModel\DummyModelRepository;
+
+class DummyModelEloquentRepository implements DummyModelRepository
+{
+    // ここにリポジトリーの具象処理を記述してね。
+}

@@ -43,9 +43,29 @@ services:
     networks:
     - laravel_study-network
 
+  test-db:
+    image: mysql:5.7
+    container_name: test-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - test_mysql_volume:/var/lib/mysql
+    ports:
+      - 33060:3306
+    networks:
+      - laravel_study-network
+
+
 networks:
   laravel_study-network:
     driver: bridge
 volumes:
   study_mysql_volume:
+    driver: local
+  test_mysql_volume:
     driver: local

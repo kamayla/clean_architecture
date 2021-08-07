@@ -7,7 +7,7 @@ use Packages\Domain\Models\Shop\ShopEntity;
 use Packages\Domain\Models\Shop\ShopId;
 use Packages\Domain\Models\Shop\ShopName;
 use Packages\Domain\Models\Shop\ShopRepository;
-use Packages\Domain\Models\Shop\ShopUserId;
+use Packages\Domain\Models\User\UserId;
 use Packages\UseCase\Shop\Create\ShopCreateRequest;
 use Packages\UseCase\Shop\Create\ShopCreateResponse;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
@@ -31,7 +31,7 @@ class ShopCreateInteractor implements ShopCreateUseCaseInterface
         $shopEntity = new ShopEntity(
             ShopId::create(Str::orderedUuid()->toString()),
             ShopName::create($request->getName()),
-            ShopUserId::create($request->getUserId())
+            UserId::create($request->getUserId())
         );
 
         $response = $this->shopRepository->create($shopEntity);
