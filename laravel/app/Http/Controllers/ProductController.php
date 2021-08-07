@@ -68,7 +68,8 @@ class ProductController extends Controller
         $response = $createUseCase($productCreateRequest);
 
         return response()->json(
-            $response->toArray()
+            $response->toArray(),
+            201
         );
     }
 }
