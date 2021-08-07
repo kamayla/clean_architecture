@@ -20,14 +20,14 @@ class MakeDomainFactoryCommand extends Command
      *
      * @var string
      */
-    protected $description = 'DomainFactoryを生成するコマンド';
+    protected $description = '# Create a new entity factory';
 
     /**
      * Createのときに表示される
      *
      * @var string
      */
-    protected $type = 'DomainFactory';
+    protected $type = 'EntityFactory';
 
     /**
      * Get the stub file for the generator.

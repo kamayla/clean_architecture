@@ -12,19 +12,25 @@ use Packages\Domain\Models\User\UserRepository;
 use Packages\UseCase\User\Create\UserCreateRequest;
 use Packages\UseCase\User\Create\UserCreateResponse;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
 
 class UserCreateInteractor implements UserCreateUseCaseInterface
 {
     /** @var UserRepository  */
     private $userRepository;
 
+    /** @var UuidGeneratorInterface  */
+    private $uuidGenerator;
+
     /**
      * UserCreateInteractor constructor.
      */
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UuidGeneratorInterface $uuidGenerator
     ) {
         $this->userRepository = $userRepository;
+        $this->uuidGenerator = $uuidGenerator;
     }
 
     public function __invoke(UserCreateRequest $request): UserCreateResponse
@@ -32,7 +38,7 @@ class UserCreateInteractor implements UserCreateUseCaseInterface
         // Userのドメインモデルを生成
         // この時、全ての値の審査も行われる
         $user = new AuthUserEntity(
-            UserId::create(Str::orderedUuid()->toString()),
+            UserId::create($this->uuidGenerator->generateUuidString()),
             UserName::create($request->getName()),
             UserEmail::create($request->getEmail()),
             UserPassword::create($request->getPassword())

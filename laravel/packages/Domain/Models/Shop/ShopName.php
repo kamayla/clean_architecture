@@ -3,8 +3,11 @@
 
 namespace Packages\Domain\Models\Shop;
 
+use RuntimeException;
+
 class ShopName
 {
+    public const MIN_LENGTH = 4;
     /**
      * @var string
      */
@@ -25,6 +28,8 @@ class ShopName
      */
     public static function create(string $value): ShopName
     {
+        self::validation($value);
+
         return new ShopName($value);
     }
 
@@ -34,5 +39,15 @@ class ShopName
     public function value(): string
     {
         return $this->_value;
+    }
+
+    /**
+     * @param string $value
+     */
+    private static function validation(string $value): void
+    {
+        if (mb_strlen($value) < self::MIN_LENGTH) {
+            throw new RuntimeException(sprintf('最低文字数は%sです', self::MIN_LENGTH));
+        }
     }
 }

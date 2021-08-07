@@ -15,6 +15,8 @@ use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\Infrastructure\EloquentRepository\ProductEloquentRepository;
 use Packages\Domain\Models\Product\ProductRepository;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
+use Packages\Infrastructure\LaravelFeatureRepository\UuidGenerateLaravelFeatureRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         /**
-         * リポジトリを登録
+         * Eloquentリポジトリを登録
          */
         $this->app->bind(
             DataStoreTransactionInterface::class,
@@ -47,6 +49,15 @@ class AppServiceProvider extends ServiceProvider
             ProductRepository::class,
             ProductEloquentRepository::class
         );
+
+        /**
+         * ファサード系Repositoryを登録
+         */
+        $this->app->bind(
+            UuidGeneratorInterface::class,
+            UuidGenerateLaravelFeatureRepository::class
+        );
+
 
         /**
          * UserCaseを登録

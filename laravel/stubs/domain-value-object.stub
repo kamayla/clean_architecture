@@ -3,6 +3,8 @@
 
 namespace Packages\Domain\ModelsDummyNameSpaceLast;
 
+use RuntimeException;
+
 class DummyValueClass
 {
     /** @var DummyType */
@@ -15,6 +17,8 @@ class DummyValueClass
 
     public static function create(DummyType $value): DummyValueClass
     {
+        self::validation($value);
+
         return new DummyValueClass($value);
     }
 
@@ -23,7 +27,7 @@ class DummyValueClass
         return $this->_value;
     }
 
-    private function isValid(): bool
+    private static function validation(DummyType $value): void
     {
         // ここに値のルールを記述
     }

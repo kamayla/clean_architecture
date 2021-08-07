@@ -6,21 +6,21 @@ use Illuminate\Console\GeneratorCommand as Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeDomainRepositoryInterfaceCommand extends Command
+class MakeDomainInterfaceRepositoryCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:i-repository';
+    protected $name = 'make:interface-repository';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'InterfaceRepositoryを生成するコマンド';
+    protected $description = '# Create a new interface repository';
 
     /**
      * Createのときに表示される
@@ -36,7 +36,7 @@ class MakeDomainRepositoryInterfaceCommand extends Command
      */
     protected function getStub(): string
     {
-        if (file_exists($customPath = $this->laravel->basePath('stubs/domain-repository-interface.stub'))) {
+        if (file_exists($customPath = $this->laravel->basePath('stubs/domain-interface-repository.stub'))) {
             return $customPath;
         }
     }

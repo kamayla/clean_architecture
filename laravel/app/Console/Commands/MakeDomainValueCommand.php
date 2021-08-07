@@ -13,14 +13,14 @@ class MakeDomainValueCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:value';
+    protected $name = 'make:domain-value';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'ValueObjectを生成するコマンド';
+    protected $description = '# Create a new domain value';
 
     /**
      * Createのときに表示される

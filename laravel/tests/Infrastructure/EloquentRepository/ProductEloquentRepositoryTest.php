@@ -13,6 +13,7 @@ use Packages\Domain\Models\Product\ProductStock;
 use Packages\Domain\Models\Shop\ShopId;
 use Packages\Infrastructure\EloquentRepository\ProductEloquentRepository;
 use Tests\TestCase;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
 
 class ProductEloquentRepositoryTest extends TestCase
 {
@@ -23,8 +24,11 @@ class ProductEloquentRepositoryTest extends TestCase
         /** @var ProductEloquentRepository $repository */
         $repository = app(ProductEloquentRepository::class);
 
+        /** @var UuidGeneratorInterface $uuidGenerator */
+        $uuidGenerator = app(UuidGeneratorInterface::class);
+
         $productEntity = new ProductEntity(
-            ProductId::create(Str::orderedUuid()->toString()),
+            ProductId::create($uuidGenerator->generateUuidString()),
             ProductName::create('エッチな本'),
             ProductPrice::create(30000),
             ProductStock::create(999),

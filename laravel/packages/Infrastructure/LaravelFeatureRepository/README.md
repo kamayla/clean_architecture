@@ -1,0 +1,6 @@
+# なぜこのRepositoryを作るのか
+
+HashやStrなどLaravelには非常に便利はファサードなどが存在しますが、
+これらをDDDの層から依存させたくないためこのRepository層を作成した。
+
+しかし、これをRepositoryと名付けるのかどうかが悩みどころ。

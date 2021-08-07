@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Packages\UseCase\Shop\Create\ShopCreateRequest;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
+use App\Http\Requests\Shop\ShopCreateFormRequest;
 
 class ShopController extends Controller
 {
@@ -37,7 +38,7 @@ class ShopController extends Controller
      * )
      */
     public function store(
-        Request $request,
+        ShopCreateFormRequest $request,
         ShopCreateUseCaseInterface $shopCreateUseCase
     ): JsonResponse {
         $userId = auth()->id();

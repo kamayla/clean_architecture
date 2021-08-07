@@ -23,7 +23,10 @@ class ProductStock
         return $this->_value;
     }
 
-    private function isValid(): bool
+    /**
+     * @param int $value
+     */
+    private static function validation(int $value): void
     {
         // ここに値のルールを記述
     }

@@ -6,21 +6,21 @@ use Illuminate\Console\GeneratorCommand as Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeDomainModelCommand extends Command
+class MakeDomainEntityCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:entity';
+    protected $name = 'make:domain-entity';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'DomainModelを生成するコマンド';
+    protected $description = '# Create a new entity class';
 
     /**
      * Createのときに表示される
@@ -36,7 +36,7 @@ class MakeDomainModelCommand extends Command
      */
     protected function getStub(): string
     {
-        if (file_exists($customPath = $this->laravel->basePath('stubs/domain_model.stub'))) {
+        if (file_exists($customPath = $this->laravel->basePath('stubs/domain_entity.stub'))) {
             return $customPath;
         }
     }

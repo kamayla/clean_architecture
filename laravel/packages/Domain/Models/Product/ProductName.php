@@ -23,7 +23,10 @@ class ProductName
         return $this->_value;
     }
 
-    private function isValid(): bool
+    /**
+     * @param string $value
+     */
+    private static function validation(string $value): void
     {
         // ここに値のルールを記述
     }

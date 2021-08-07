@@ -13,14 +13,14 @@ class MakeDomainEloquentRepositoryCommand extends Command
      *
      * @var string
      */
-    protected $name = 'make:e-repository';
+    protected $name = 'make:eloquent-repository';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'EloquentRepositoryを生成するコマンド';
+    protected $description = '# Create a new eloquent repository';
 
     /**
      * Createのときに表示される
