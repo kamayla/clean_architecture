@@ -2,7 +2,7 @@
 
 namespace Packages\Application\User;
 
-use Illuminate\Support\Str;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
 use Packages\Domain\Models\User\AuthUserEntity;
 use Packages\Domain\Models\User\UserEmail;
 use Packages\Domain\Models\User\UserId;
@@ -12,7 +12,6 @@ use Packages\Domain\Models\User\UserRepository;
 use Packages\UseCase\User\Create\UserCreateRequest;
 use Packages\UseCase\User\Create\UserCreateResponse;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
-use Packages\Domain\CommonRepository\UuidGeneratorInterface;
 
 class UserCreateInteractor implements UserCreateUseCaseInterface
 {

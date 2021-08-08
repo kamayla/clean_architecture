@@ -9,7 +9,7 @@ interface UserRepository
     /**
      * @param string $userId
      */
-    public function getUserById(string $userId): User;
+    public function getEloquentUserById(string $userId): User;
 
     public function getById(UserId $userId): UserEntity;
 

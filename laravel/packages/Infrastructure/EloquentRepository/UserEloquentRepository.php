@@ -12,7 +12,7 @@ use App\User;
 class UserEloquentRepository implements UserRepository
 {
 
-    public function getUserById(string $userId): User
+    public function getEloquentUserById(string $userId): User
     {
         return User::find($userId);
     }

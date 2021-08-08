@@ -2,16 +2,11 @@
 
 namespace Packages\Application\User;
 
-use Illuminate\Support\Str;
+use Packages\Domain\Models\User\UserId;
+use Packages\Domain\Models\User\UserRepository;
 use Packages\UseCase\User\Get\UserGetRequest;
 use Packages\UseCase\User\Get\UserGetResponse;
 use Packages\UseCase\User\Get\UserGetUseCaseInterface;
-use Packages\Domain\Models\User\UserEntity;
-use Packages\Domain\Models\User\UserId;
-use Packages\Domain\Models\User\UserName;
-use Packages\Domain\Models\User\UserPassword;
-use Packages\Domain\Models\User\UserEmail;
-use Packages\Domain\Models\User\UserRepository;
 
 class UserGetInteractor implements UserGetUseCaseInterface
 {
@@ -29,6 +24,12 @@ class UserGetInteractor implements UserGetUseCaseInterface
 
     public function __invoke(UserGetRequest $request): UserGetResponse
     {
+        $userEntity = $this->userRepository->getById(UserId::create($request->getid()));
 
+        return new UserGetResponse(
+            $userEntity->getId()->value(),
+            $userEntity->getName()->value(),
+            $userEntity->getEmail()->value()
+        );
     }
 }

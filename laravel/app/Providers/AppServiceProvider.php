@@ -3,23 +3,24 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Packages\Application\Product\ProductCreateInteractor;
 use Packages\Application\Shop\ShopCreateInteractor;
 use Packages\Application\User\UserCreateInteractor;
 use Packages\Domain\CommonRepository\DataStoreTransactionInterface;
+use Packages\Domain\CommonRepository\UuidGeneratorInterface;
+use Packages\Domain\Models\Product\ProductRepository;
 use Packages\Domain\Models\Shop\ShopRepository;
 use Packages\Domain\Models\User\UserRepository;
 use Packages\Infrastructure\EloquentRepository\DataStoreTransactionEloquentRepository;
+use Packages\Infrastructure\EloquentRepository\ProductEloquentRepository;
 use Packages\Infrastructure\EloquentRepository\ShopEloquentRepository;
 use Packages\Infrastructure\EloquentRepository\UserEloquentRepository;
+use Packages\Infrastructure\LaravelFeatureRepository\UuidGenerateLaravelFeatureRepository;
+use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
-use Packages\Infrastructure\EloquentRepository\ProductEloquentRepository;
-use Packages\Domain\Models\Product\ProductRepository;
-use Packages\Domain\CommonRepository\UuidGeneratorInterface;
-use Packages\Infrastructure\LaravelFeatureRepository\UuidGenerateLaravelFeatureRepository;
-
-use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
-use Packages\Application\Product\ProductCreateInteractor;
+use Packages\UseCase\User\Get\UserGetUseCaseInterface;
+use Packages\Application\User\UserGetInteractor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -68,6 +69,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UserCreateUseCaseInterface::class,
             UserCreateInteractor::class
+        );
+
+        $this->app->bind(
+            UserGetUseCaseInterface::class,
+            UserGetInteractor::class
         );
 
         $this->app->bind(

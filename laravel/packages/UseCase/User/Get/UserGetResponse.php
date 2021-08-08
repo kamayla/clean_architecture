@@ -7,6 +7,9 @@ namespace Packages\UseCase\User\Get;
 class UserGetResponse
 {
     /** @var string */
+    private $id;
+
+    /** @var string */
     private $name;
 
     /** @var string */
@@ -14,13 +17,24 @@ class UserGetResponse
 
     /**
      * UserCreateResponse constructor.
+     *
+     * @param string $id
      * @param string $name
      * @param string $email
      */
-    public function __construct(string $name, string $email)
+    public function __construct(string $id, string $name, string $email)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     /**
@@ -37,5 +51,14 @@ class UserGetResponse
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
     }
 }

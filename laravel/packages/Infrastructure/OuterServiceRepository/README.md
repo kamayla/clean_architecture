@@ -1,0 +1,2 @@
+# OuterServiceRepositoryディレクトリの役割
+外部API(StripeやGMOPaymentGateway)の具象処理を担当する層。

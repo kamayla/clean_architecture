@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         // 認証処理ではEloquentモデルのUserインスタンスが必要なため
         // 本来ContorllerではRepositoryを使わないのだが仕方なく使う。
-        $ormUser = $userRepository->getUserById($userEntity->getId());
+        $ormUser = $userRepository->getEloquentUserById($userEntity->getId());
 
         event(new Registered($ormUser));
 

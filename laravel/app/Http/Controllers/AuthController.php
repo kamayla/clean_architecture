@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateRequest;
 use Illuminate\Support\Str;
+use Packages\UseCase\User\Get\UserGetUseCaseInterface;
+use Packages\UseCase\User\Get\UserGetRequest;
 
 class AuthController extends Controller
 {
@@ -139,9 +141,14 @@ class AuthController extends Controller
      *     security={{ "apiAuth": {} }}
      * )
      */
-    public function me()
+    public function me(UserGetUseCaseInterface $userGetUseCase)
     {
-        return response()->json(auth()->user());
+        //TODO:ここではLaravelのAuth機能でIDだけを取得させてから
+        // UseCase経由でRepositoryからデータを取得させているがこの辺もう少し考察したい
+        $userGetRequest = new UserGetRequest(auth()->id());
+        $userGetResponse = $userGetUseCase($userGetRequest);
+
+        return response()->json($userGetResponse->toArray());
     }
 
     /**
