@@ -62,7 +62,6 @@ class AppServiceProvider extends ServiceProvider
             UuidGenerateLaravelFeatureRepository::class
         );
 
-
         /**
          * UserCaseを登録
          */
