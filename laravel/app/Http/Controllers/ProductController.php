@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
 use Packages\UseCase\Product\Create\ProductCreateRequest;
+use App\Http\Requests\Product\ProductCreateFormRequest;
 
 class ProductController extends Controller
 {
@@ -55,14 +56,15 @@ class ProductController extends Controller
      * )
      */
     public function store(
-        Request $request,
+        ProductCreateFormRequest $request,
         ProductCreateUseCaseInterface $createUseCase
     ): JsonResponse {
         $productCreateRequest = new ProductCreateRequest(
             $request->name,
             $request->price,
             $request->stock,
-            $request->shop_id
+            $request->shop_id,
+            auth()->id()
         );
 
         $response = $createUseCase($productCreateRequest);

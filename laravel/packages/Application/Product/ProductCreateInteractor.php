@@ -14,23 +14,44 @@ use Packages\Domain\Models\Product\ProductName;
 use Packages\Domain\Models\Product\ProductPrice;
 use Packages\Domain\Models\Product\ProductStock;
 use Packages\Domain\Models\Shop\ShopId;
+use Packages\Domain\Models\User\UserId;
+use RuntimeException;
+use Packages\Domain\Models\Shop\ShopRepository;
 
 class ProductCreateInteractor implements ProductCreateUseCaseInterface
 {
     /** @var ProductRepository */
     private $productRepository;
 
+    /** @var ShopRepository  */
+    private $shopRepository;
+
     /** @var UuidGeneratorInterface  */
     private $uuidGenerator;
 
-    public function __construct(ProductRepository $productRepository, UuidGeneratorInterface $uuidGenerator)
-    {
+    public function __construct(
+        ProductRepository $productRepository,
+        ShopRepository $shopRepository,
+        UuidGeneratorInterface $uuidGenerator
+    ) {
         $this->productRepository = $productRepository;
+        $this->shopRepository = $shopRepository;
         $this->uuidGenerator = $uuidGenerator;
     }
 
     public function __invoke(ProductCreateRequest $request): ProductCreateResponse
     {
+        $shopId = ShopId::create($request->getShopId());
+        $userId = UserId::create($request->getUserId());
+
+
+        $shopEntity = $this->shopRepository->getById($shopId);
+
+        // Shopが当リクエストのUserIdの所有物か確認している
+        if ($shopEntity->getUserId()->isEquals($userId)) {
+            throw new RuntimeException('このShopは貴方のものではありません。');
+        }
+
         $productEntity = new ProductEntity(
             ProductId::create($this->uuidGenerator->generateUuidString()),
             ProductName::create($request->getName()),

@@ -7,9 +7,6 @@ namespace Packages\UseCase\User\Create;
 class UserCreateRequest
 {
     /** @var string */
-    private $id;
-
-    /** @var string */
     private $name;
 
     /** @var string */
@@ -24,20 +21,11 @@ class UserCreateRequest
      * @param string $email
      * @param string $password
      */
-    public function __construct(string $id, string $name, string $email, string $password)
+    public function __construct(string $name, string $email, string $password)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     /**

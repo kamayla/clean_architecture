@@ -95,7 +95,7 @@ class ProductCreateResponse
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => $this->name,
+            'price' => $this->price,
             'stock' => $this->stock,
             'shop_id' => $this->shopId,
         ];

@@ -2,7 +2,9 @@
 
 namespace {{ namespace }};
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class {{ class }} extends FormRequest
 {
@@ -13,7 +15,7 @@ class {{ class }} extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +28,14 @@ class {{ class }} extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'message' => $validator->errors()->toArray(),
+            ], 403)
+        );
     }
 }

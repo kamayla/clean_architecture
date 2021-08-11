@@ -31,4 +31,15 @@ class UserId
     {
         return $this->_value;
     }
+
+    /**
+     * UserId同士が等しいか審査する
+     *
+     * @param UserId $otherId
+     * @return bool
+     */
+    public function isEquals(UserId $otherId): bool
+    {
+        return $this->_value === $otherId->value();
+    }
 }

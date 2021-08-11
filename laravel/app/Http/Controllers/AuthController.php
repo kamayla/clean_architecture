@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
-use Packages\UseCase\User\Create\UserCreateRequest;
 use Illuminate\Support\Str;
-use Packages\UseCase\User\Get\UserGetUseCaseInterface;
+use Packages\UseCase\User\Create\UserCreateRequest;
+use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Get\UserGetRequest;
+use Packages\UseCase\User\Get\UserGetUseCaseInterface;
+use App\Http\Requests\Auth\AuthRegisterRequest;
+use App\Http\Requests\Auth\AuthLoginRequest;
 
 class AuthController extends Controller
 {
@@ -67,11 +68,10 @@ class AuthController extends Controller
      * )
      */
     public function register(
-        Request $request,
+        AuthRegisterRequest $request,
         UserCreateUseCaseInterface $userCreateUseCase
     ) {
         $userCreateRequest = new UserCreateRequest(
-            (string) Str::orderedUuid(), // orderedUuidはタイムスタンプが加味されているため、重複リスクが限りなく0
             $request->name,
             $request->email,
             $request->password
@@ -118,9 +118,9 @@ class AuthController extends Controller
      *     )
      * )
      */
-    public function login()
+    public function login(AuthLoginRequest $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->all(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -143,8 +143,6 @@ class AuthController extends Controller
      */
     public function me(UserGetUseCaseInterface $userGetUseCase)
     {
-        //TODO:ここではLaravelのAuth機能でIDだけを取得させてから
-        // UseCase経由でRepositoryからデータを取得させているがこの辺もう少し考察したい
         $userGetRequest = new UserGetRequest(auth()->id());
         $userGetResponse = $userGetUseCase($userGetRequest);
 

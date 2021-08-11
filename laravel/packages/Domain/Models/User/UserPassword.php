@@ -14,7 +14,7 @@ use RuntimeException;
  */
 class UserPassword
 {
-    public const MIN_LENGTH = 10;
+    public const MIN_LENGTH = 8;
 
     /** @var string */
     private $_value;
@@ -30,9 +30,8 @@ class UserPassword
 
     public static function create(string $userPassword): self
     {
-        if (! self::isValid($userPassword)) {
-            throw new RuntimeException('パスワードは最低10文字です');
-        }
+        self::validation($userPassword);
+
         return new self($userPassword);
     }
 
@@ -41,16 +40,20 @@ class UserPassword
         return $this->_value;
     }
 
+    /**
+     * 平文のパスワードをハッシュ化する処理
+     *
+     * @return string
+     */
     public function getHashValue(): string
     {
         return Hash::make($this->_value);
     }
 
-    private static function isValid(string $userPassword): bool
+    private static function validation(string $userPassword): void
     {
-        // TODO:ルールがザルなのであとで考える
-        if (strlen($userPassword) < self::MIN_LENGTH) return false;
-
-        return true;
+        if (strlen($userPassword) < self::MIN_LENGTH) {
+            throw new RuntimeException(sprintf('パスワードは最低%s文字です。', UserPassword::MIN_LENGTH));
+        }
     }
 }

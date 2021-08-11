@@ -18,6 +18,9 @@ class ProductCreateRequest
     /** @var string */
     private $shopId;
 
+    /** @var string */
+    private $userId;
+
     /**
      * ProductCreateRequest constructor.
      * @param string $name
@@ -25,12 +28,13 @@ class ProductCreateRequest
      * @param int $stock
      * @param string $shopId
      */
-    public function __construct(string $name, int $price, int $stock, string $shopId)
+    public function __construct(string $name, int $price, int $stock, string $shopId, string $userId)
     {
         $this->name = $name;
         $this->price = $price;
         $this->stock = $stock;
         $this->shopId = $shopId;
+        $this->userId = $userId;
     }
 
     /**
@@ -64,4 +68,14 @@ class ProductCreateRequest
     {
         return $this->shopId;
     }
+
+    /**
+     * @return string
+     */
+    public function getUserId(): string
+    {
+        return $this->userId;
+    }
+
+
 }
