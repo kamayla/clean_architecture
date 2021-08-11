@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Packages\Domain\Models\User\UserPassword;
+use Packages\Domain\Models\User\UserName;
 
 class AuthRegisterRequest extends FormRequest
 {
@@ -30,6 +31,7 @@ class AuthRegisterRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
+                sprintf('min:%s', UserName::MIN_LNEGTH),
                 'max:255'
             ],
             'email' => [

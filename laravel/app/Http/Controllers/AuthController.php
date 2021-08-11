@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Http\Requests\Auth\AuthLoginRequest;
+use App\Http\Requests\Auth\AuthRegisterRequest;
+use Illuminate\Http\JsonResponse;
 use Packages\UseCase\User\Create\UserCreateRequest;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Get\UserGetRequest;
 use Packages\UseCase\User\Get\UserGetUseCaseInterface;
-use App\Http\Requests\Auth\AuthRegisterRequest;
-use App\Http\Requests\Auth\AuthLoginRequest;
 
 class AuthController extends Controller
 {
@@ -70,7 +69,7 @@ class AuthController extends Controller
     public function register(
         AuthRegisterRequest $request,
         UserCreateUseCaseInterface $userCreateUseCase
-    ) {
+    ): JsonResponse {
         $userCreateRequest = new UserCreateRequest(
             $request->name,
             $request->email,
@@ -152,7 +151,7 @@ class AuthController extends Controller
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function logout()
     {
@@ -164,7 +163,7 @@ class AuthController extends Controller
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function refresh()
     {
@@ -176,7 +175,7 @@ class AuthController extends Controller
      *
      * @param  string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function respondWithToken($token)
     {

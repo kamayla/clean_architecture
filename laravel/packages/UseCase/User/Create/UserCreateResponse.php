@@ -51,4 +51,18 @@ class UserCreateResponse
     {
         return $this->email;
     }
+
+    /**
+     * 公開可能データを配列で返す処理
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+    }
 }
