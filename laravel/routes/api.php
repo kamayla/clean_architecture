@@ -35,6 +35,7 @@ Route::group([
     Route::get('me', 'AuthController@me');
 });
 
+
 /**
  * Shopルーティング
  */
@@ -44,6 +45,7 @@ Route::group([
     Route::post('shop', 'ShopController@store');
 });
 
+
 /**
  * Productルーティング
  */
@@ -51,5 +53,17 @@ Route::group([
     'middleware' => ['auth:api'],
 ], function () {
     Route::post('product', 'ProductController@store');
+});
+
+
+/**
+ * Paymentルーティング
+ */
+Route::group([
+    'middleware' => ['auth:api'],
+    'prefix' => 'payment'
+], function () {
+    Route::post('account', 'PaymentController@registerCard');
+    Route::put('account', 'PaymentController@updateCard');
 });
 

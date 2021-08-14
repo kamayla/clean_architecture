@@ -69,6 +69,10 @@ class ShopCreateInteractor implements ShopCreateUseCaseInterface
     private function chargeShopOpenFee(): void
     {
         $userEntity = $this->userRepository->getAuthUser();
-        $this->paymentRepository->executeCharge($userEntity, Amount::create(30000));
+        $this->paymentRepository->executeCharge(
+            $userEntity,
+            Amount::create(ShopEntity::SHOP_CREATE_FEE),
+            'お店の開設'
+        );
     }
 }

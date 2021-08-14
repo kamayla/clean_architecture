@@ -18,6 +18,7 @@ class StripeRepository implements PaymentRepository
     /**
      * @param UserEntity $userEntity
      * @param CardToken $cardToken
+     * @throws CustomerAlreadyCreated
      */
     public function setPaymentAcount(UserEntity $userEntity, CardToken $cardToken): void
     {
@@ -29,7 +30,7 @@ class StripeRepository implements PaymentRepository
                 'source' => $cardToken->value(),
             ]);
         } catch (CustomerAlreadyCreated $e) {
-            report($e);
+            throw $e;
         }
     }
 
@@ -42,20 +43,19 @@ class StripeRepository implements PaymentRepository
         /** @var User $user */
         $user = User::find($userEntity->getId()->value());
 
-        try {
-            $user->updateStripeCustomer([
-                'source' => $cardToken->value(),
-            ]);
-        } catch (CustomerAlreadyCreated $e) {
-            report($e);
-        }
+        $user->updateStripeCustomer([
+            'source' => $cardToken->value(),
+        ]);
     }
 
     /**
      * @param UserEntity $userEntity
      * @param Amount $amount
+     * @param string|null $description
+     * @throws PaymentActionRequired
+     * @throws PaymentFailure
      */
-    public function executeCharge(UserEntity $userEntity, Amount $amount): void
+    public function executeCharge(UserEntity $userEntity, Amount $amount, string $description = null): void
     {
         /** @var User $user */
         $user = User::find($userEntity->getId()->value());
@@ -65,10 +65,13 @@ class StripeRepository implements PaymentRepository
         try {
             $user->charge(
                 $amount->value(),
-                $paymentMethod->id
+                $paymentMethod->id,
+                [
+                    'description' => $description
+                ]
             );
         } catch (PaymentActionRequired | PaymentFailure $e) {
-            report($e);
+            throw $e;
         }
     }
 

@@ -29,7 +29,7 @@ interface PaymentRepository
      * @param UserEntity $userEntity 支払いをする対象User
      * @param Amount $amount 支払金額
      */
-    public function executeCharge(UserEntity $userEntity, Amount $amount): void;
+    public function executeCharge(UserEntity $userEntity, Amount $amount, string $description = null): void;
 
     /**
      * 登録されているクレカの一覧を取得する。

@@ -3,11 +3,16 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Packages\Application\AuthUser\AuthUserGetInteractor;
+use Packages\Application\Payment\PaymentRegisterInteractor;
+use Packages\Application\Payment\PaymentUpdateAccountInteractor;
 use Packages\Application\Product\ProductCreateInteractor;
 use Packages\Application\Shop\ShopCreateInteractor;
 use Packages\Application\User\UserCreateInteractor;
+use Packages\Application\User\UserGetInteractor;
 use Packages\Domain\CommonRepository\DataStoreTransactionInterface;
 use Packages\Domain\CommonRepository\UuidGeneratorInterface;
+use Packages\Domain\Models\Payment\PaymentRepository;
 use Packages\Domain\Models\Product\ProductRepository;
 use Packages\Domain\Models\Shop\ShopRepository;
 use Packages\Domain\Models\User\UserRepository;
@@ -15,16 +20,15 @@ use Packages\Infrastructure\EloquentRepository\DataStoreTransactionEloquentRepos
 use Packages\Infrastructure\EloquentRepository\ProductEloquentRepository;
 use Packages\Infrastructure\EloquentRepository\ShopEloquentRepository;
 use Packages\Infrastructure\EloquentRepository\UserEloquentRepository;
+use Packages\Infrastructure\ExtarnalServiceRepository\Stripe\StripeRepository;
 use Packages\Infrastructure\LaravelFeatureRepository\UuidGenerateLaravelFeatureRepository;
+use Packages\UseCase\AuthUser\Get\AuthUserGetUseCaseInterface;
+use Packages\UseCase\Payment\Register\PaymentRegisterUseCaseInterface;
+use Packages\UseCase\Payment\UpdateAccount\PaymentUpdateAccountUseCaseInterface;
 use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Get\UserGetUseCaseInterface;
-use Packages\Application\User\UserGetInteractor;
-use Packages\UseCase\AuthUser\Get\AuthUserGetUseCaseInterface;
-use Packages\Application\AuthUser\AuthUserGetInteractor;
-use Packages\Domain\Models\Payment\PaymentRepository;
-use Packages\Infrastructure\ExtarnalServiceRepository\Stripe\StripeRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -58,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
             ProductEloquentRepository::class
         );
 
+
         /**
          * ファサード系Repositoryを登録
          */
@@ -65,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
             UuidGeneratorInterface::class,
             UuidGenerateLaravelFeatureRepository::class
         );
+
 
         /**
          * UserCaseを登録
@@ -92,6 +98,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             AuthUserGetUseCaseInterface::class,
             AuthUserGetInteractor::class
+        );
+
+        $this->app->bind(
+            PaymentRegisterUseCaseInterface::class,
+            PaymentRegisterInteractor::class
+        );
+
+        $this->app->bind(
+            PaymentUpdateAccountUseCaseInterface::class,
+            PaymentUpdateAccountInteractor::class
         );
 
 
