@@ -25,13 +25,9 @@ class StripeRepository implements PaymentRepository
         /** @var User $user */
         $user = User::find($userEntity->getId()->value());
 
-        try {
-            $user->createAsStripeCustomer([
-                'source' => $cardToken->value(),
-            ]);
-        } catch (CustomerAlreadyCreated $e) {
-            throw $e;
-        }
+        $user->createAsStripeCustomer([
+            'source' => $cardToken->value(),
+        ]);
     }
 
     /**
@@ -62,17 +58,13 @@ class StripeRepository implements PaymentRepository
 
         $paymentMethod = $user->defaultPaymentMethod();
 
-        try {
-            $user->charge(
-                $amount->value(),
-                $paymentMethod->id,
-                [
-                    'description' => $description
-                ]
-            );
-        } catch (PaymentActionRequired | PaymentFailure $e) {
-            throw $e;
-        }
+        $user->charge(
+            $amount->value(),
+            $paymentMethod->id,
+            [
+                'description' => $description
+            ]
+        );
     }
 
     /**
