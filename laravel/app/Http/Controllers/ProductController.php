@@ -63,8 +63,7 @@ class ProductController extends Controller
             $request->name,
             $request->price,
             $request->stock,
-            $request->shop_id,
-            auth()->id()
+            $request->shop_id
         );
 
         $response = $createUseCase($productCreateRequest);

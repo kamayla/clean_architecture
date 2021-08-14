@@ -21,6 +21,10 @@ use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Get\UserGetUseCaseInterface;
 use Packages\Application\User\UserGetInteractor;
+use Packages\UseCase\AuthUser\Get\AuthUserGetUseCaseInterface;
+use Packages\Application\AuthUser\AuthUserGetInteractor;
+use Packages\Domain\Models\Payment\PaymentRepository;
+use Packages\Infrastructure\ExtarnalServiceRepository\Stripe\StripeRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -83,6 +87,20 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ProductCreateUseCaseInterface::class,
             ProductCreateInteractor::class
+        );
+
+        $this->app->bind(
+            AuthUserGetUseCaseInterface::class,
+            AuthUserGetInteractor::class
+        );
+
+
+        /**
+         * ExtarnalAPIのリポジトリを登録
+         */
+        $this->app->bind(
+            PaymentRepository::class,
+            StripeRepository::class
         );
     }
 

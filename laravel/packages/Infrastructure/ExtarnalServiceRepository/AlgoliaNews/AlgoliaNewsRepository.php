@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Packages\Infrastructure\OuterServiceRepository\AlgoliaNews;
+namespace Packages\Infrastructure\ExtarnalServiceRepository\AlgoliaNews;
 
 use Illuminate\Support\Facades\Http;
-use Packages\Infrastructure\OuterServiceRepository\AlgoliaNews\Apis\GetNews;
+use Packages\Infrastructure\ExtarnalServiceRepository\AlgoliaNews\Apis\GetNews;
 
 class AlgoliaNewsRepository
 {

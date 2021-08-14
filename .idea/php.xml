@@ -113,6 +113,14 @@
       <path value="$PROJECT_DIR$/laravel/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/laravel/vendor/swagger-api/swagger-ui" />
       <path value="$PROJECT_DIR$/laravel/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/laravel/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/laravel/vendor/laravel/cashier" />
+      <path value="$PROJECT_DIR$/laravel/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/laravel/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/laravel/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/laravel/vendor/moneyphp/money" />
+      <path value="$PROJECT_DIR$/laravel/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/laravel/vendor/symfony/polyfill-intl-icu" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2">

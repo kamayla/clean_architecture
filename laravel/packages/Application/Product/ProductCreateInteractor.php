@@ -4,6 +4,7 @@
 namespace Packages\Application\Product;
 
 use Packages\Domain\CommonRepository\UuidGeneratorInterface;
+use Packages\Domain\Models\User\UserRepository;
 use Packages\UseCase\Product\Create\ProductCreateRequest;
 use Packages\UseCase\Product\Create\ProductCreateResponse;
 use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
@@ -26,29 +27,35 @@ class ProductCreateInteractor implements ProductCreateUseCaseInterface
     /** @var ShopRepository  */
     private $shopRepository;
 
+    /** @var UserRepository */
+    private $userRepository;
+
     /** @var UuidGeneratorInterface  */
     private $uuidGenerator;
 
     public function __construct(
         ProductRepository $productRepository,
         ShopRepository $shopRepository,
+        UserRepository $userRepository,
         UuidGeneratorInterface $uuidGenerator
     ) {
         $this->productRepository = $productRepository;
         $this->shopRepository = $shopRepository;
+        $this->userRepository = $userRepository;
         $this->uuidGenerator = $uuidGenerator;
     }
 
     public function __invoke(ProductCreateRequest $request): ProductCreateResponse
     {
         $shopId = ShopId::create($request->getShopId());
-        $userId = UserId::create($request->getUserId());
-
 
         $shopEntity = $this->shopRepository->getById($shopId);
 
-        // Shopが当リクエストのUserIdの所有物か確認している
-        if ($shopEntity->getUserId()->isEquals($userId)) {
+        $authUserEntity = $this->userRepository->getAuthUser();
+
+        // Shopが当リクエストの認証ユーザーの持ち物かを審査
+        // TODO:ここはSpecificationに以降すべきか検討
+        if ($shopEntity->getUserId()->isEqual($authUserEntity->getId())) {
             throw new RuntimeException('このShopは貴方のものではありません。');
         }
 

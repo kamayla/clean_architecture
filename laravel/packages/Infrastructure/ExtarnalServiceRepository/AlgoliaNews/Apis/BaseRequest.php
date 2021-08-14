@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Packages\Infrastructure\OuterServiceRepository\AlgoliaNews\Apis;
+namespace Packages\Infrastructure\ExtarnalServiceRepository\AlgoliaNews\Apis;
 
 abstract class BaseRequest
 {

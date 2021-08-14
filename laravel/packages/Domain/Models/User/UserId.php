@@ -38,7 +38,7 @@ class UserId
      * @param UserId $otherId
      * @return bool
      */
-    public function isEquals(UserId $otherId): bool
+    public function isEqual(UserId $otherId): bool
     {
         return $this->_value === $otherId->value();
     }

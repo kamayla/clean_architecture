@@ -118,6 +118,14 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/swagger-api/swagger-ui" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/sabberworm/php-css-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/cashier" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/phenx/php-font-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/phenx/php-svg-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/moneyphp/money" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/dompdf/dompdf" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/symfony/polyfill-intl-icu" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

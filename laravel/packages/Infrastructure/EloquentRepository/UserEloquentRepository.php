@@ -31,7 +31,16 @@ class UserEloquentRepository implements UserRepository
 
     public function getById(UserId $userId): UserEntity
     {
+        /** @var User $ormUser */
         $ormUser = User::find($userId->value());
+
+        return UserEntityFactory::createFromORM($ormUser);
+    }
+
+    public function getAuthUser(): UserEntity
+    {
+        /** @var User $ormUser */
+        $ormUser = auth('api')->user();
 
         return UserEntityFactory::createFromORM($ormUser);
     }

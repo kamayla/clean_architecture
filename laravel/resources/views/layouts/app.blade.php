@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+   {{--  Stripeの読み込み  --}}
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <div id="app">
@@ -76,5 +79,50 @@
             @yield('content')
         </main>
     </div>
+    <div>
+        <input id="card-holder-name" type="text">
+        <!-- Stripe要素のプレースホルダ -->
+        <div id="card-number"></div>
+        <div id="card-expiry"></div>
+        <div id="card-cvc"></div>
+
+        @auth
+        <button id="card-button" data-secret="{{ $intent->client_secret }}">
+            Update Payment Method
+        </button>
+        @endauth
+    </div>
 </body>
+<script>
+    const stripe = Stripe('pk_test_Y8GBXhUorqdwEvPFuS7KDBjn');
+    const elements = stripe.elements();
+    const cardNumber = elements.create('cardNumber');
+    const cardExpiry = elements.create('cardExpiry');
+    const cardCvc = elements.create('cardCvc');
+
+    cardNumber.mount('#card-number');
+    cardExpiry.mount('#card-expiry');
+    cardCvc.mount('#card-cvc');
+
+    const cardHolderName = document.getElementById('card-holder-name');
+    const cardButton = document.getElementById('card-button');
+    const clientSecret = cardButton.dataset.secret;
+
+    cardButton.addEventListener('click', async (e) => {
+        const { setupIntent, error } = await stripe.confirmCardSetup(
+            clientSecret, {
+                payment_method: {
+                    card: cardNumber,
+                    billing_details: { name: 'Ippei KAmimura' }
+                }
+            }
+        );
+
+        if (error) {
+            // ユーザーに"error.message"を表示する…
+        } else {
+            console.log(setupIntent);
+        }
+    });
+</script>
 </html>
