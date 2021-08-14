@@ -65,7 +65,6 @@
         cardButton.addEventListener('click', async (e) => {
             await stripe.createToken(cardNumber).then(res => {
                 document.getElementById('card-token').innerText = res.token.id;
-                console.log(res);
             });
         });
     </script>
