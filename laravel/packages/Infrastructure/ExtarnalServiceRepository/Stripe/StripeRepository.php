@@ -15,6 +15,10 @@ use Packages\Domain\Models\User\UserEntity;
 
 class StripeRepository implements PaymentRepository
 {
+    /**
+     * @param UserEntity $userEntity
+     * @param CardToken $cardToken
+     */
     public function setPaymentAcount(UserEntity $userEntity, CardToken $cardToken): void
     {
         /** @var User $user */
@@ -29,6 +33,10 @@ class StripeRepository implements PaymentRepository
         }
     }
 
+    /**
+     * @param UserEntity $userEntity
+     * @param CardToken $cardToken
+     */
     public function updatePaymentMethod(UserEntity $userEntity, CardToken $cardToken): void
     {
         /** @var User $user */
@@ -43,6 +51,10 @@ class StripeRepository implements PaymentRepository
         }
     }
 
+    /**
+     * @param UserEntity $userEntity
+     * @param Amount $amount
+     */
     public function executeCharge(UserEntity $userEntity, Amount $amount): void
     {
         /** @var User $user */
@@ -79,6 +91,10 @@ class StripeRepository implements PaymentRepository
         return $paymentMehotdIds;
     }
 
+    /**
+     * @param UserEntity $userEntity
+     * @param PaymentMethodId $paymentMethodId
+     */
     public function addPaymentMethod(UserEntity $userEntity, PaymentMethodId $paymentMethodId): void
     {
         /** @var User $user */
@@ -87,6 +103,10 @@ class StripeRepository implements PaymentRepository
         $user->addPaymentMethod($paymentMethodId->value());
     }
 
+    /**
+     * @param UserEntity $userEntity
+     * @param PaymentMethodId $paymentMethodId
+     */
     public function removePaymentMethod(UserEntity $userEntity, PaymentMethodId $paymentMethodId): void
     {
         /** @var User $user */
