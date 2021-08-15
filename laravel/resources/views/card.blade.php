@@ -26,7 +26,7 @@
             }
 
             .card-form-wapper {
-                width: 500px;
+                min-width: 500px;
                 border: 1px solid gray;
                 border-radius: 8px;
                 padding: 16px;
@@ -37,7 +37,7 @@
     </head>
     <body>
         <div class="card-form-wapper">
-            <h1>カードを登録してね♡</h1>
+            <h1>Stripeのカードトークン取得</h1>
             <h2 id="card-token"></h2>
             <div class="form-control mb-3" id="card-number"></div>
             <div class="form-control mb-3" id="card-expiry"></div>
@@ -47,8 +47,6 @@
                 Get Card Token
             </button>
         </div>
-
-        <div id="card-element"></div>
     </body>
     <script>
         const stripe = Stripe('pk_test_Y8GBXhUorqdwEvPFuS7KDBjn');

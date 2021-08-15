@@ -20,29 +20,48 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card-form-wapper {
+                min-width: 500px;
+                border: 1px solid gray;
+                border-radius: 8px;
+                padding: 16px;
             }
         </style>
         <script src="https://js.pay.jp/v2/pay.js"></script>
     </head>
     <body>
-        <h1>PayJPのToken取得画面</h1>
-        <h1 id="token-result"></h1>
-        <div id="card-element"></div>
-        <button id="card-submit">押してね♡</button>
+        <div class="card-form-wapper">
+            <h1>PayJPのToken取得画面</h1>
+            <h2 id="token-result"></h2>
+            <div class="form-control mb-3" id="card-number"></div>
+            <div class="form-control mb-3" id="card-expiry"></div>
+            <div class="form-control mb-3" id="card-cvc"></div>
+
+            <button type="button" class="btn btn-primary" id="card-submit">押してね♡</button>
+        </div>
     </body>
     <script>
         const payjp = Payjp('pk_test_55d0d044b48294732c59cfd2')
 
         const payJpElements = payjp.elements()
 
-        const cardElement = payJpElements.create('card')
+        const cardNumber = payJpElements.create('cardNumber')
+        const cardExpiry = payJpElements.create('cardExpiry')
+        const cardCvc = payJpElements.create('cardCvc')
 
-        cardElement.mount('#card-element')
+        cardNumber.mount('#card-number')
+        cardExpiry.mount('#card-expiry')
+        cardCvc.mount('#card-cvc')
 
         const cardButton = document.getElementById('card-submit');
 
         cardButton.addEventListener('click', () => {
-            payjp.createToken(cardElement).then((response) => {
+            payjp.createToken(cardNumber).then((response) => {
                 if (response.error) {
                     // handle error
                 } else {
