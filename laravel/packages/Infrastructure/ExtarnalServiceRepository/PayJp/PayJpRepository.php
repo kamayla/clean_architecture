@@ -49,8 +49,6 @@ class PayJpRepository implements PaymentRepository
         $customer->card = $cardToken->value();
         $customer = $customer->save();
 
-
-
         // Stripeと違い、自動的にでデフォルトカードが切り替わらないので、
         // ここでデフォルトカードと切り替えている。
         $card = $customer->cards->data[0];
