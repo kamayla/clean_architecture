@@ -17,6 +17,7 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.5",
+        "payjp/payjp-php": "^1.2",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

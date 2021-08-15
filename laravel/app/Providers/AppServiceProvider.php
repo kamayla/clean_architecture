@@ -29,6 +29,7 @@ use Packages\UseCase\Product\Create\ProductCreateUseCaseInterface;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use Packages\UseCase\User\Create\UserCreateUseCaseInterface;
 use Packages\UseCase\User\Get\UserGetUseCaseInterface;
+use Packages\Infrastructure\ExtarnalServiceRepository\PayJp\PayJpRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -116,7 +117,7 @@ class AppServiceProvider extends ServiceProvider
          */
         $this->app->bind(
             PaymentRepository::class,
-            StripeRepository::class
+            PayJpRepository::class
         );
     }
 

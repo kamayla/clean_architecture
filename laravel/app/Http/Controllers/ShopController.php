@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Packages\UseCase\Shop\Create\ShopCreateRequest;
 use Packages\UseCase\Shop\Create\ShopCreateUseCaseInterface;
 use App\Http\Requests\Shop\ShopCreateFormRequest;
@@ -25,7 +24,7 @@ class ShopController extends Controller
      *                     property="name",
      *                     description="Shop名",
      *                     type="string",
-     *                     default="メガチュッパ"
+     *                     default="ビンコムセンター"
      *                 )
      *             )
      *         )
@@ -52,7 +51,7 @@ class ShopController extends Controller
 
         return response()->json(
             $shopCreateResponse->toArray(),
-            201
+            JsonResponse::HTTP_CREATED
         );
     }
 }

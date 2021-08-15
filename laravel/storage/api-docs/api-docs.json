@@ -68,12 +68,12 @@
                                     "email": {
                                         "description": "メールアドレス",
                                         "type": "string",
-                                        "default": "ippei_kamimura@icloud.com"
+                                        "default": "ipp@icloud.com"
                                     },
                                     "password": {
                                         "description": "パスワード",
                                         "type": "string",
-                                        "default": "aaaaaa"
+                                        "default": "aaaaaaaa"
                                     }
                                 },
                                 "type": "object"
@@ -98,6 +98,76 @@
                 "responses": {
                     "200": {
                         "description": "自分自身のJson"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/account": {
+            "put": {
+                "tags": [
+                    "User/Payment"
+                ],
+                "description": "pamentのアカウントの更新",
+                "operationId": "3ddc2d74d90e188b60562eb8c08fa975",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "description": "クレカのトークン",
+                                        "type": "string",
+                                        "default": "token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User/Payment"
+                ],
+                "description": "pamentのアカウントを作成",
+                "operationId": "c3e7517b2eafdee06b1d5d53eb1417ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "token": {
+                                        "description": "クレカのトークン",
+                                        "type": "string",
+                                        "default": "token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
                     }
                 },
                 "security": [
@@ -174,7 +244,7 @@
                                     "name": {
                                         "description": "Shop名",
                                         "type": "string",
-                                        "default": "メガチュッパ"
+                                        "default": "ビンコムセンター"
                                     }
                                 },
                                 "type": "object"

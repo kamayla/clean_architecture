@@ -101,13 +101,13 @@ class AuthController extends Controller
      *                     property="email",
      *                     description="メールアドレス",
      *                     type="string",
-     *                     default="ippei_kamimura@icloud.com"
+     *                     default="ipp@icloud.com"
      *                 ),
      *                 @OA\Property(
      *                     property="password",
      *                     description="パスワード",
      *                     type="string",
-     *                     default="aaaaaa"
+     *                     default="aaaaaaaa"
      *                 )
      *             )
      *         )

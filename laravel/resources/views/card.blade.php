@@ -33,6 +33,7 @@
             }
         </style>
         <script src="https://js.stripe.com/v3/"></script>
+        <script src="https://js.pay.jp/v2/pay.js"></script>
     </head>
     <body>
         <div class="card-form-wapper">
@@ -46,6 +47,8 @@
                 Get Card Token
             </button>
         </div>
+
+        <div id="card-element"></div>
     </body>
     <script>
         const stripe = Stripe('pk_test_Y8GBXhUorqdwEvPFuS7KDBjn');

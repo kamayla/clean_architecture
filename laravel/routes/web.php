@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/card', function () {
     return view('card');
 });
+
+Route::get('/cardpayjp', function () {
+    return view('cardpayjp');
+});

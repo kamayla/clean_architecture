@@ -19,6 +19,8 @@ use Packages\Domain\Models\User\UserId;
 use RuntimeException;
 use Packages\Domain\Models\Shop\ShopRepository;
 
+use Packages\Domain\Models\Shop\Specifications\ShopBelongsToAuthUserSpecification;
+
 class ProductCreateInteractor implements ProductCreateUseCaseInterface
 {
     /** @var ProductRepository */
@@ -27,22 +29,22 @@ class ProductCreateInteractor implements ProductCreateUseCaseInterface
     /** @var ShopRepository  */
     private $shopRepository;
 
-    /** @var UserRepository */
-    private $userRepository;
-
     /** @var UuidGeneratorInterface  */
     private $uuidGenerator;
+
+    /** @var ShopBelongsToAuthUserSpecification  */
+    private $shopBelongsToAuthUserSpecification;
 
     public function __construct(
         ProductRepository $productRepository,
         ShopRepository $shopRepository,
-        UserRepository $userRepository,
-        UuidGeneratorInterface $uuidGenerator
+        UuidGeneratorInterface $uuidGenerator,
+        ShopBelongsToAuthUserSpecification $shopBelongsToAuthUserSpecification
     ) {
         $this->productRepository = $productRepository;
         $this->shopRepository = $shopRepository;
-        $this->userRepository = $userRepository;
         $this->uuidGenerator = $uuidGenerator;
+        $this->shopBelongsToAuthUserSpecification = $shopBelongsToAuthUserSpecification;
     }
 
     public function __invoke(ProductCreateRequest $request): ProductCreateResponse
@@ -51,11 +53,8 @@ class ProductCreateInteractor implements ProductCreateUseCaseInterface
 
         $shopEntity = $this->shopRepository->getById($shopId);
 
-        $authUserEntity = $this->userRepository->getAuthUser();
-
         // Shopが当リクエストの認証ユーザーの持ち物かを審査
-        // TODO:ここはSpecificationに以降すべきか検討
-        if ($shopEntity->getUserId()->isEqual($authUserEntity->getId())) {
+        if (!$this->shopBelongsToAuthUserSpecification->isAuthUsersShop($shopEntity)) {
             throw new RuntimeException('このShopは貴方のものではありません。');
         }
 

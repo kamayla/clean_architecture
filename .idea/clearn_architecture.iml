@@ -126,6 +126,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/moneyphp/money" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/dompdf/dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/symfony/polyfill-intl-icu" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/payjp/payjp-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

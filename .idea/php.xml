@@ -121,6 +121,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/moneyphp/money" />
       <path value="$PROJECT_DIR$/laravel/vendor/dompdf/dompdf" />
       <path value="$PROJECT_DIR$/laravel/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/laravel/vendor/payjp/payjp-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2">
