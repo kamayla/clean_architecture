@@ -70,6 +70,7 @@ class PayJpRepository implements PaymentRepository
             "customer" => $customer->id,
             "amount" => $amount->value(),
             "currency" => 'jpy',
+            'description' => $description
         ]);
     }
 
