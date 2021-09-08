@@ -10,7 +10,7 @@ class ShopEntity
      * @var int ショップの作成をするための料金
      * TODO: 本当にここに書くのが正しい？？か検討中
      */
-    public const SHOP_CREATE_FEE = 50000;
+    public const SHOP_CREATE_FEE = 80000;
 
     /** @var ShopId */
     private $id;

@@ -117,7 +117,7 @@ class AppServiceProvider extends ServiceProvider
          */
         $this->app->bind(
             PaymentRepository::class,
-            PayJpRepository::class
+            StripeRepository::class
         );
     }
 

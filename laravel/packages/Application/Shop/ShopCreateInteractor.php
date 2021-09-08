@@ -49,7 +49,7 @@ class ShopCreateInteractor implements ShopCreateUseCaseInterface
 
     public function __invoke(ShopCreateRequest $request): ShopCreateResponse
     {
-        // ショップを作成するには初期費用50000円かかるのでその費用を決済
+        // ショップを作成するには初期費用80000円かかるのでその費用を決済
         $this->chargeShopOpenFee();
 
         $shopEntity = new ShopEntity(
@@ -57,7 +57,7 @@ class ShopCreateInteractor implements ShopCreateUseCaseInterface
             ShopName::create($request->getName()),
             UserId::create($request->getUserId())
         );
-
+        
         $response = $this->shopRepository->create($shopEntity);
 
         return new ShopCreateResponse(
